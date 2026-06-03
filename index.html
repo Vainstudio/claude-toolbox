@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Claude Toolbox — Inventaire des capacités sur ce poste</title>
+<meta name="description" content="Catalogue complet des skills, commandes intégrées et serveurs MCP dont dispose Claude Code sur ce poste." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0F172A', panel: '#1E293B', panel2: '#334155',
+          run: '#22C55E', txt: '#F8FAFC', muted: '#94A3B8',
+        },
+        fontFamily: {
+          mono: ['JetBrains Mono', 'monospace'],
+          sans: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body { background:#0F172A; color:#F8FAFC; font-family:'IBM Plex Sans',sans-serif; }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(34,197,94,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,197,94,.04) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+  .card { transition: border-color .2s ease, background-color .2s ease, transform .2s ease; }
+  .card:hover { border-color: rgba(34,197,94,.55); background-color:#243244; }
+  .chip { transition: all .15s ease; }
+  ::selection { background:#22C55E; color:#0F172A; }
+  /* scrollbar */
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-track { background:#0F172A; }
+  ::-webkit-scrollbar-thumb { background:#334155; border-radius:6px; }
+  ::-webkit-scrollbar-thumb:hover { background:#475569; }
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; animation:none !important; } }
+  .pulse-dot { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:.35 } }
+</style>
+</head>
+<body class="min-h-screen antialiased">
+
+<!-- NAVBAR -->
+<header class="fixed top-4 left-4 right-4 z-30 mx-auto max-w-7xl">
+  <div class="flex items-center justify-between rounded-2xl border border-white/10 bg-ink/80 px-4 py-3 backdrop-blur-md sm:px-6">
+    <a href="#top" class="flex items-center gap-2.5 cursor-pointer">
+      <span class="grid h-8 w-8 place-items-center rounded-lg bg-run/15 ring-1 ring-run/40">
+        <svg viewBox="0 0 24 24" class="h-4 w-4 text-run" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      </span>
+      <span class="font-mono text-sm font-bold tracking-tight">claude<span class="text-run">/</span>toolbox</span>
+    </a>
+    <nav class="hidden items-center gap-6 text-sm text-muted sm:flex">
+      <a href="#skills" class="hover:text-txt cursor-pointer transition-colors">Skills</a>
+      <a href="#mcp" class="hover:text-txt cursor-pointer transition-colors">MCP</a>
+      <a href="#agents" class="hover:text-txt cursor-pointer transition-colors">Agents</a>
+      <a href="#orphans" class="hover:text-txt cursor-pointer transition-colors">Orphelins</a>
+    </nav>
+    <a href="#catalogue" class="rounded-lg bg-run px-3.5 py-2 font-mono text-xs font-semibold text-ink hover:bg-run/90 cursor-pointer transition-colors">Explorer →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="grid-bg relative overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-28">
+  <div class="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[820px] -translate-x-1/2 rounded-full bg-run/10 blur-[120px]"></div>
+  <div class="relative mx-auto max-w-7xl px-5">
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-panel/60 px-3 py-1.5 font-mono text-xs text-muted">
+      <span class="pulse-dot h-2 w-2 rounded-full bg-run"></span>
+      Inventaire vivant · poste de Sylvain · <span id="genDate" class="text-txt"></span>
+    </div>
+    <h1 class="mt-6 max-w-4xl font-mono text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
+      Tout ce que <span class="text-run">Claude</span> peut actionner<br class="hidden sm:block" /> sur cette machine.
+    </h1>
+    <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+      Un recensement complet et honnête des <strong class="text-txt">skills .md</strong>, des
+      <strong class="text-txt">commandes intégrées</strong> et des <strong class="text-txt">serveurs MCP</strong>
+      réellement connectés. Cherchez, filtrez, ouvrez chaque capacité.
+    </p>
+
+    <!-- STATS -->
+    <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
+        <div class="font-mono text-3xl font-bold text-run" data-count="29">29</div>
+        <div class="mt-1 text-sm text-muted">Skills actifs</div>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
+        <div class="font-mono text-3xl font-bold text-run">9</div>
+        <div class="mt-1 text-sm text-muted">Serveurs MCP</div>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
+        <div class="font-mono text-3xl font-bold text-run">200+</div>
+        <div class="mt-1 text-sm text-muted">Outils MCP</div>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
+        <div class="font-mono text-3xl font-bold text-amber-400">52</div>
+        <div class="mt-1 text-sm text-muted">Skills orphelins</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOGUE -->
+<section id="catalogue" class="mx-auto max-w-7xl px-5 pb-10">
+  <!-- search + filters -->
+  <div class="sticky top-24 z-20 -mx-5 mb-8 border-y border-white/10 bg-ink/85 px-5 py-4 backdrop-blur-md">
+    <div class="relative">
+      <svg class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="search" type="search" autocomplete="off" placeholder="Rechercher une capacité… (ex: figma, 3d, recherche, déployer)"
+        class="w-full rounded-xl border border-white/10 bg-panel/60 py-3.5 pl-12 pr-4 font-mono text-sm text-txt placeholder:text-muted/70 focus:border-run/60 focus:outline-none focus:ring-2 focus:ring-run/30" />
+    </div>
+    <div id="filters" class="mt-3 flex flex-wrap gap-2"></div>
+  </div>
+
+  <p id="resultCount" class="mb-4 font-mono text-xs text-muted"></p>
+  <div id="grid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+  <p id="empty" class="hidden py-16 text-center font-mono text-muted">Aucune capacité ne correspond à « <span id="emptyTerm" class="text-txt"></span> ».</p>
+</section>
+
+<!-- ORPHANS -->
+<section id="orphans" class="mx-auto max-w-7xl px-5 py-14">
+  <div class="rounded-2xl border border-amber-400/30 bg-amber-400/5 p-6 sm:p-8">
+    <div class="flex items-start gap-4">
+      <span class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-amber-400/15 ring-1 ring-amber-400/40">
+        <svg viewBox="0 0 24 24" class="h-5 w-5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      <div>
+        <h2 class="font-mono text-lg font-bold text-amber-300">52 skills « fantômes » détectés</h2>
+        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+          Le dossier <code class="rounded bg-black/30 px-1.5 py-0.5 font-mono text-amber-200">~/.claude/skills</code>
+          contient 52 liens symboliques (admin, adobe-*, aem-*, appbuilder-*, seo-*, marketing-*, etc.) qui pointent vers
+          <code class="rounded bg-black/30 px-1.5 py-0.5 font-mono text-amber-200">VAIN-PARTAGE/.agents/skills/</code> — un dossier
+          <strong class="text-amber-200">qui n'existe plus</strong>. Ces skills apparaissent dans la liste mais sont
+          <strong class="text-amber-200">cassés et inutilisables</strong> en l'état.
+        </p>
+        <p class="mt-3 font-mono text-xs text-muted">Pour les réactiver : restaurer le dossier <span class="text-amber-200">.agents/skills/</span> ou refaire pointer les symlinks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10 py-10">
+  <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 sm:flex-row">
+    <p class="font-mono text-xs text-muted">claude<span class="text-run">/</span>toolbox · généré par Claude Code · design via <span class="text-txt">ui-ux-pro-max</span></p>
+    <p class="font-mono text-xs text-muted">Données factuelles au <span id="genDate2"></span> · déployé sur Vercel</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   DONNÉES — inventaire factuel des capacités de ce poste
+   ============================================================ */
+const DATA = [
+  /* ---- SKILLS DOSSIER ACTIFS ---- */
+  {n:"ui-ux-pro-max", cat:"skill", group:"Skill .md", tag:"Design", desc:"Intelligence design UI/UX : 67 styles, 96 palettes, 57 pairings de polices, 25 charts, 13 stacks (React, Next, Vue, Svelte, SwiftUI, Tailwind, shadcn…).", path:"~/.claude/skills/ui-ux-pro-max"},
+  {n:"all-skills", cat:"skill", group:"Skill .md", tag:"Méta", desc:"Méta-skill : orchestre toutes les skills installées pour une seule requête — route, compose et synthétise leur guidance.", path:"~/.claude/skills/all-skills"},
+  {n:"stop-slop", cat:"skill", group:"Skill .md", tag:"Écriture", desc:"Élimine les tics d'écriture IA d'un texte (formulations prévisibles) lors de la rédaction, édition ou relecture.", path:"~/.claude/skills/stop-slop"},
+  {n:"new-odoo-project", cat:"skill", group:"Skill .md", tag:"Odoo", desc:"Scaffolde un nouveau projet Odoo website builder : outils, workflows, template .env et orientation première session.", path:"~/.claude/skills/new-odoo-project"},
+  {n:"odoo-theme-fix", cat:"skill", group:"Skill .md", tag:"Odoo", desc:"Corrige le thème d'une page Odoo depuis un screenshot : écrit des overrides CSS ciblés poussés via RPC, sans toucher l'arch.", path:"~/.claude/skills/odoo-theme-fix"},
+  {n:"threejs-fundamentals", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Scène, caméras, renderer, hiérarchie Object3D, systèmes de coordonnées et transforms.", path:"~/.claude/skills/threejs-fundamentals"},
+  {n:"threejs-geometry", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Création de géométrie : formes natives, BufferGeometry, meshes custom, instancing.", path:"~/.claude/skills/threejs-geometry"},
+  {n:"threejs-materials", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Matériaux : PBR, basic, phong, shader materials et propriétés de matériaux.", path:"~/.claude/skills/threejs-materials"},
+  {n:"threejs-lighting", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Éclairage : types de lumières, ombres, environment lighting (IBL).", path:"~/.claude/skills/threejs-lighting"},
+  {n:"threejs-textures", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Textures : types, UV mapping, environment maps, cubemaps HDR, optimisation.", path:"~/.claude/skills/threejs-textures"},
+  {n:"threejs-animation", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Animation : keyframes, skeletal, morph targets, mixing et animations GLTF.", path:"~/.claude/skills/threejs-animation"},
+  {n:"threejs-shaders", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Shaders : GLSL, ShaderMaterial, uniforms, effets custom et fragment shaders.", path:"~/.claude/skills/threejs-shaders"},
+  {n:"threejs-postprocessing", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Post-processing : EffectComposer, bloom, DOF, color grading, effets screen-space.", path:"~/.claude/skills/threejs-postprocessing"},
+  {n:"threejs-loaders", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Chargement d'assets : GLTF, textures, modèles, environnements HDR, patterns async.", path:"~/.claude/skills/threejs-loaders"},
+  {n:"threejs-interaction", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Interaction : raycasting, controls, input souris/tactile, sélection d'objets.", path:"~/.claude/skills/threejs-interaction"},
+
+  /* ---- COMMANDES / SKILLS INTÉGRÉS CLAUDE CODE ---- */
+  {n:"deep-research", cat:"builtin", group:"Commande intégrée", tag:"Recherche", desc:"Harnais de recherche profonde : fan-out de recherches web, fetch de sources, vérification adversariale et rapport sourcé.", path:"/deep-research"},
+  {n:"code-review", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Revue du diff courant : bugs de correction + nettoyages (réutilisation, simplification, efficience) à effort réglable.", path:"/code-review"},
+  {n:"security-review", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Revue de sécurité complète des changements en attente sur la branche courante.", path:"/security-review"},
+  {n:"review", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Revue d'une pull request.", path:"/review"},
+  {n:"simplify", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Nettoie le code modifié (réutilisation, simplification, efficience, altitude) puis applique les correctifs. Qualité seulement.", path:"/simplify"},
+  {n:"verify", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Vérifie qu'un changement fait bien ce qu'il doit : lance l'app et observe le comportement réel.", path:"/verify"},
+  {n:"run", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Lance et pilote l'app du projet pour voir un changement fonctionner (CLI, serveur, TUI, Electron, navigateur…).", path:"/run"},
+  {n:"init", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Initialise un fichier CLAUDE.md avec la documentation de la codebase.", path:"/init"},
+  {n:"claude-api", cat:"builtin", group:"Commande intégrée", tag:"Dev IA", desc:"Construit, débogue et optimise des apps Claude API / SDK Anthropic (caching, thinking, tool use) et migre entre versions de modèles.", path:"/claude-api"},
+  {n:"schedule", cat:"builtin", group:"Commande intégrée", tag:"Automatisation", desc:"Crée/gère des agents distants planifiés (routines cron) ou un run unique programmé.", path:"/schedule"},
+  {n:"loop", cat:"builtin", group:"Commande intégrée", tag:"Automatisation", desc:"Exécute un prompt ou une commande en boucle sur un intervalle (ou auto-rythmé).", path:"/loop"},
+  {n:"update-config", cat:"builtin", group:"Commande intégrée", tag:"Config", desc:"Configure le harnais via settings.json : hooks, permissions, variables d'env, comportements automatiques.", path:"/update-config"},
+  {n:"keybindings-help", cat:"builtin", group:"Commande intégrée", tag:"Config", desc:"Personnalise les raccourcis clavier (~/.claude/keybindings.json) : rebind, chords, touche de submit.", path:"/keybindings-help"},
+  {n:"fewer-permission-prompts", cat:"builtin", group:"Commande intégrée", tag:"Config", desc:"Analyse les transcripts pour générer une allowlist d'outils et réduire les demandes de permission.", path:"/fewer-permission-prompts"},
+
+  /* ---- SERVEURS MCP CONNECTÉS ---- */
+  {n:"Figma", cat:"mcp", group:"Serveur MCP", tag:"Design", count:"17 outils", desc:"Pont code ↔ design bidirectionnel : lire un design vers le code, générer dans Figma, Code Connect, FigJam, diagrammes, design systems.", path:"mcp · claude.ai Figma"},
+  {n:"Canva", cat:"mcp", group:"Serveur MCP", tag:"Design", count:"34 outils", desc:"Créer/éditer des designs, brand templates, export multi-formats, dossiers, commentaires, upload d'assets.", path:"mcp · claude.ai Canva"},
+  {n:"Adobe for creativity", cat:"mcp", group:"Serveur MCP", tag:"Création", count:"63 outils", desc:"Firefly / Photoshop / Lightroom : génération, retouche image (HSL, exposition, courbes), détourage, vectorisation, vidéo, PDF.", path:"mcp · claude.ai Adobe"},
+  {n:"After Effects", cat:"mcp", group:"Serveur MCP", tag:"Motion", count:"30 outils", desc:"Pilotage d'After Effects : compositions, effets, keyframes, expressions, presets, audio, layers via bridge script.", path:"mcp · AfterEffectsMCP"},
+  {n:"Shopify", cat:"mcp", group:"Serveur MCP", tag:"E-commerce", count:"27 outils", desc:"Gestion boutique : produits, collections, commandes, clients, inventaire, discounts, analytics ShopifyQL, API GraphQL Admin.", path:"mcp · claude.ai Shopify"},
+  {n:"Gmail", cat:"mcp", group:"Serveur MCP", tag:"Google", count:"12 outils", desc:"Recherche de threads, gestion de brouillons et de labels (créer, appliquer, retirer).", path:"mcp · claude.ai Gmail"},
+  {n:"Google Calendar", cat:"mcp", group:"Serveur MCP", tag:"Google", count:"8 outils", desc:"Événements (créer, modifier, supprimer, répondre), liste des agendas, suggestion de créneaux.", path:"mcp · claude.ai Calendar"},
+  {n:"Google Drive", cat:"mcp", group:"Serveur MCP", tag:"Google", count:"8 outils", desc:"Recherche, lecture et création de fichiers, métadonnées, permissions, fichiers récents.", path:"mcp · claude.ai Drive"},
+  {n:"21st.dev (magic)", cat:"mcp", group:"Serveur MCP", tag:"UI", count:"4 outils", desc:"Génération de composants UI (builder, inspiration, refiner) et recherche de logos de marques.", path:"mcp · magic"},
+
+  /* ---- SOUS-AGENTS ---- */
+  {n:"general-purpose", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Agent généraliste : recherche complexe, recherche de code, tâches multi-étapes. Accès à tous les outils.", path:"Agent tool"},
+  {n:"Explore", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Agent de recherche en lecture seule : sweeps larges sur de nombreux fichiers/dossiers, renvoie la conclusion.", path:"Agent tool"},
+  {n:"Plan", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Agent architecte : conçoit des plans d'implémentation pas-à-pas, identifie les fichiers critiques et arbitrages.", path:"Agent tool"},
+  {n:"claude-code-guide", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Répond aux questions sur Claude Code (hooks, slash commands, MCP, settings), le SDK et l'API Claude.", path:"Agent tool"},
+  {n:"statusline-setup", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Configure la status line de Claude Code (settings).", path:"Agent tool"},
+  {n:"claude", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Agent par défaut polyvalent pour toute tâche qui ne rentre pas dans un agent plus spécifique.", path:"Agent tool"},
+];
+
+/* catégories pour les filtres */
+const CATS = [
+  {key:"all",     label:"Tout"},
+  {key:"skill",   label:"Skills .md"},
+  {key:"builtin", label:"Commandes"},
+  {key:"mcp",     label:"Serveurs MCP"},
+  {key:"agent",   label:"Sous-agents"},
+];
+
+const ICONS = {
+  skill:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+  builtin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
+  mcp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>',
+  agent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>',
+};
+const CAT_COLOR = {
+  skill:"text-run ring-run/40 bg-run/10",
+  builtin:"text-sky-400 ring-sky-400/40 bg-sky-400/10",
+  mcp:"text-fuchsia-400 ring-fuchsia-400/40 bg-fuchsia-400/10",
+  agent:"text-amber-400 ring-amber-400/40 bg-amber-400/10",
+};
+
+/* ============================================================
+   RENDU
+   ============================================================ */
+let activeCat = "all";
+const grid = document.getElementById("grid");
+const searchEl = document.getElementById("search");
+const filtersEl = document.getElementById("filters");
+const resultCount = document.getElementById("resultCount");
+const emptyEl = document.getElementById("empty");
+
+function buildFilters(){
+  filtersEl.innerHTML = CATS.map(c=>{
+    const n = c.key==="all" ? DATA.length : DATA.filter(d=>d.cat===c.key).length;
+    return `<button data-cat="${c.key}" class="chip cursor-pointer rounded-lg border px-3 py-1.5 font-mono text-xs font-medium ${c.key===activeCat?'border-run/60 bg-run/15 text-run':'border-white/10 bg-panel/40 text-muted hover:text-txt hover:border-white/25'}">${c.label} <span class="opacity-60">${n}</span></button>`;
+  }).join("");
+  filtersEl.querySelectorAll("button").forEach(b=>{
+    b.addEventListener("click",()=>{ activeCat=b.dataset.cat; buildFilters(); render(); });
+  });
+}
+
+function card(d){
+  const color = CAT_COLOR[d.cat] || CAT_COLOR.skill;
+  const count = d.count ? `<span class="ml-auto shrink-0 rounded-md bg-black/30 px-2 py-0.5 font-mono text-[10px] text-muted">${d.count}</span>` : "";
+  return `<article class="card group flex flex-col rounded-2xl border border-white/10 bg-panel/50 p-5">
+    <div class="flex items-center gap-3">
+      <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg ring-1 ${color}"><span class="h-4 w-4 block [&>svg]:h-4 [&>svg]:w-4">${ICONS[d.cat]||""}</span></span>
+      <h3 class="font-mono text-[15px] font-bold tracking-tight text-txt break-all">${d.n}</h3>
+      ${count}
+    </div>
+    <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">${d.desc}</p>
+    <div class="mt-4 flex items-center justify-between gap-2 border-t border-white/5 pt-3">
+      <span class="rounded-md bg-white/5 px-2 py-0.5 font-mono text-[10px] text-muted">${d.tag}</span>
+      <code class="truncate font-mono text-[10px] text-muted/70" title="${d.path}">${d.path}</code>
+    </div>
+  </article>`;
+}
+
+function render(){
+  const q = searchEl.value.trim().toLowerCase();
+  let list = DATA.filter(d=>activeCat==="all"||d.cat===activeCat);
+  if(q){
+    list = list.filter(d=>(d.n+" "+d.desc+" "+d.tag+" "+d.group).toLowerCase().includes(q));
+  }
+  grid.innerHTML = list.map(card).join("");
+  resultCount.textContent = `${list.length} capacité${list.length>1?"s":""} affichée${list.length>1?"s":""}`;
+  emptyEl.classList.toggle("hidden", list.length!==0);
+  if(list.length===0){ document.getElementById("emptyTerm").textContent = q || activeCat; }
+}
+
+searchEl.addEventListener("input", render);
+buildFilters();
+render();
+
+/* anchors helpers vers sections */
+document.querySelectorAll('a[href="#skills"]').forEach(a=>a.setAttribute("href","#catalogue"));
+document.querySelectorAll('a[href="#mcp"],a[href="#agents"]').forEach(a=>{
+  a.addEventListener("click",e=>{
+    e.preventDefault();
+    const cat = a.getAttribute("href")==="#mcp"?"mcp":"agent";
+    activeCat=cat; buildFilters(); render();
+    document.getElementById("catalogue").scrollIntoView({behavior:"smooth"});
+  });
+});
+
+/* dates */
+const d = new Date(2026,5,3); // 3 juin 2026 (date de génération)
+const fmt = d.toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+document.getElementById("genDate").textContent = fmt;
+document.getElementById("genDate2").textContent = fmt;
+</script>
+</body>
+</html>
