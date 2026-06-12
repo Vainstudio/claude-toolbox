@@ -62,7 +62,6 @@
       <a href="#skills" class="hover:text-txt cursor-pointer transition-colors">Skills</a>
       <a href="#mcp" class="hover:text-txt cursor-pointer transition-colors">MCP</a>
       <a href="#agents" class="hover:text-txt cursor-pointer transition-colors">Agents</a>
-      <a href="#orphans" class="hover:text-txt cursor-pointer transition-colors">Orphelins</a>
     </nav>
     <a href="#catalogue" class="rounded-lg bg-run px-3.5 py-2 font-mono text-xs font-semibold text-ink hover:bg-run/90 cursor-pointer transition-colors">Explorer →</a>
   </div>
@@ -88,7 +87,7 @@
     <!-- STATS -->
     <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
       <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
-        <div class="font-mono text-3xl font-bold text-run" data-count="29">29</div>
+        <div class="font-mono text-3xl font-bold text-run" data-count="67">67</div>
         <div class="mt-1 text-sm text-muted">Skills actifs</div>
       </div>
       <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
@@ -100,8 +99,8 @@
         <div class="mt-1 text-sm text-muted">Outils MCP</div>
       </div>
       <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
-        <div class="font-mono text-3xl font-bold text-amber-400">52</div>
-        <div class="mt-1 text-sm text-muted">Skills orphelins</div>
+        <div class="font-mono text-3xl font-bold text-run">96</div>
+        <div class="mt-1 text-sm text-muted">Capacités totales</div>
       </div>
     </div>
   </div>
@@ -124,28 +123,6 @@
   <p id="empty" class="hidden py-16 text-center font-mono text-muted">Aucune capacité ne correspond à « <span id="emptyTerm" class="text-txt"></span> ».</p>
 </section>
 
-<!-- ORPHANS -->
-<section id="orphans" class="mx-auto max-w-7xl px-5 py-14">
-  <div class="rounded-2xl border border-amber-400/30 bg-amber-400/5 p-6 sm:p-8">
-    <div class="flex items-start gap-4">
-      <span class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-amber-400/15 ring-1 ring-amber-400/40">
-        <svg viewBox="0 0 24 24" class="h-5 w-5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      </span>
-      <div>
-        <h2 class="font-mono text-lg font-bold text-amber-300">52 skills « fantômes » détectés</h2>
-        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
-          Le dossier <code class="rounded bg-black/30 px-1.5 py-0.5 font-mono text-amber-200">~/.claude/skills</code>
-          contient 52 liens symboliques (admin, adobe-*, aem-*, appbuilder-*, seo-*, marketing-*, etc.) qui pointent vers
-          <code class="rounded bg-black/30 px-1.5 py-0.5 font-mono text-amber-200">VAIN-PARTAGE/.agents/skills/</code> — un dossier
-          <strong class="text-amber-200">qui n'existe plus</strong>. Ces skills apparaissent dans la liste mais sont
-          <strong class="text-amber-200">cassés et inutilisables</strong> en l'état.
-        </p>
-        <p class="mt-3 font-mono text-xs text-muted">Pour les réactiver : restaurer le dossier <span class="text-amber-200">.agents/skills/</span> ou refaire pointer les symlinks.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer class="border-t border-white/10 py-10">
   <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 sm:flex-row">
@@ -159,24 +136,76 @@
    DONNÉES — inventaire factuel des capacités de ce poste
    ============================================================ */
 const DATA = [
-  /* ---- SKILLS DOSSIER ACTIFS ---- */
-  {n:"ui-ux-pro-max", cat:"skill", group:"Skill .md", tag:"Design", desc:"Intelligence design UI/UX : 67 styles, 96 palettes, 57 pairings de polices, 25 charts, 13 stacks (React, Next, Vue, Svelte, SwiftUI, Tailwind, shadcn…).", path:"~/.claude/skills/ui-ux-pro-max"},
-  {n:"all-skills", cat:"skill", group:"Skill .md", tag:"Méta", desc:"Méta-skill : orchestre toutes les skills installées pour une seule requête — route, compose et synthétise leur guidance.", path:"~/.claude/skills/all-skills"},
-  {n:"stop-slop", cat:"skill", group:"Skill .md", tag:"Écriture", desc:"Élimine les tics d'écriture IA d'un texte (formulations prévisibles) lors de la rédaction, édition ou relecture.", path:"~/.claude/skills/stop-slop"},
-  {n:"new-odoo-project", cat:"skill", group:"Skill .md", tag:"Odoo", desc:"Scaffolde un nouveau projet Odoo website builder : outils, workflows, template .env et orientation première session.", path:"~/.claude/skills/new-odoo-project"},
-  {n:"odoo-theme-fix", cat:"skill", group:"Skill .md", tag:"Odoo", desc:"Corrige le thème d'une page Odoo depuis un screenshot : écrit des overrides CSS ciblés poussés via RPC, sans toucher l'arch.", path:"~/.claude/skills/odoo-theme-fix"},
-  {n:"threejs-fundamentals", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Scène, caméras, renderer, hiérarchie Object3D, systèmes de coordonnées et transforms.", path:"~/.claude/skills/threejs-fundamentals"},
-  {n:"threejs-geometry", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Création de géométrie : formes natives, BufferGeometry, meshes custom, instancing.", path:"~/.claude/skills/threejs-geometry"},
-  {n:"threejs-materials", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Matériaux : PBR, basic, phong, shader materials et propriétés de matériaux.", path:"~/.claude/skills/threejs-materials"},
-  {n:"threejs-lighting", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Éclairage : types de lumières, ombres, environment lighting (IBL).", path:"~/.claude/skills/threejs-lighting"},
-  {n:"threejs-textures", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Textures : types, UV mapping, environment maps, cubemaps HDR, optimisation.", path:"~/.claude/skills/threejs-textures"},
-  {n:"threejs-animation", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Animation : keyframes, skeletal, morph targets, mixing et animations GLTF.", path:"~/.claude/skills/threejs-animation"},
-  {n:"threejs-shaders", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Shaders : GLSL, ShaderMaterial, uniforms, effets custom et fragment shaders.", path:"~/.claude/skills/threejs-shaders"},
-  {n:"threejs-postprocessing", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Post-processing : EffectComposer, bloom, DOF, color grading, effets screen-space.", path:"~/.claude/skills/threejs-postprocessing"},
-  {n:"threejs-loaders", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Chargement d'assets : GLTF, textures, modèles, environnements HDR, patterns async.", path:"~/.claude/skills/threejs-loaders"},
-  {n:"threejs-interaction", cat:"skill", group:"Skill .md", tag:"Three.js", desc:"Interaction : raycasting, controls, input souris/tactile, sélection d'objets.", path:"~/.claude/skills/threejs-interaction"},
+  /* ---- SKILLS (67) ---- */
+  {n:"all-skills", cat:"skill", group:"Méta", tag:"Méta", desc:"Orchestrate every installed skill for a single request. Meta-skill: routes, composes, and synthesizes.", path:"~/.claude/skills/all-skills"},
+  {n:"ui-ux-pro-max", cat:"skill", group:"Design / UI", tag:"Design", desc:"UI/UX design intelligence. 67 styles, 96 palettes, 57 font pairings, 25 charts, 13 stacks (React, Next.js, Vue, Svelte, SwiftUI…", path:"~/.claude/skills/ui-ux-pro-max"},
+  {n:"stardust", cat:"skill", group:"Design / UI", tag:"Stardust", desc:"Redesign an existing website to make it better. Multi-page, incremental, reasoned in the open. Built on top of impeccable.", path:"~/.claude/skills/stardust"},
+  {n:"extract", cat:"skill", group:"Design / UI", tag:"Stardust", desc:"Crawl an existing website (capped, multi-page) and seed stardust/current/ with PRODUCT.md, DESIGN.md, DESIGN.json, a per-page inventory…", path:"~/.claude/skills/extract"},
+  {n:"direct", cat:"skill", group:"Design / UI", tag:"Stardust", desc:"Set a redesign direction for an existing website. Analyzes the user's intent, picks a palette and visual direction…", path:"~/.claude/skills/direct"},
+  {n:"prototype", cat:"skill", group:"Design / UI", tag:"Stardust", desc:"Render side-by-side before/after prototypes that compare a page on the current website to the proposed redesign…", path:"~/.claude/skills/prototype"},
+  {n:"prepare-migration", cat:"skill", group:"Design / UI", tag:"Stardust", desc:"Orchestrate the migrate-prep cascade — extract --prep → direct --prep → prototype --prep → assets prep — with confirmation gates…", path:"~/.claude/skills/prepare-migration"},
+  {n:"migrate", cat:"skill", group:"Design / UI", tag:"Stardust", desc:"Apply DESIGN, canon, and modules to every page in the inventory, producing a deployable static HTML site.", path:"~/.claude/skills/migrate"},
+  {n:"threejs-fundamentals", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js scene setup, cameras, renderer, Object3D hierarchy, coordinate systems.", path:"~/.claude/skills/threejs-fundamentals"},
+  {n:"threejs-geometry", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js geometry creation - built-in shapes, BufferGeometry, custom geometry, instancing.", path:"~/.claude/skills/threejs-geometry"},
+  {n:"threejs-materials", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js materials - PBR, basic, phong, shader materials, material properties.", path:"~/.claude/skills/threejs-materials"},
+  {n:"threejs-lighting", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js lighting - light types, shadows, environment lighting.", path:"~/.claude/skills/threejs-lighting"},
+  {n:"threejs-textures", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js textures - texture types, UV mapping, environment maps, texture settings.", path:"~/.claude/skills/threejs-textures"},
+  {n:"threejs-animation", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js animation - keyframe animation, skeletal animation, morph targets, animation mixing.", path:"~/.claude/skills/threejs-animation"},
+  {n:"threejs-shaders", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js shaders - GLSL, ShaderMaterial, uniforms, custom effects.", path:"~/.claude/skills/threejs-shaders"},
+  {n:"threejs-postprocessing", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js post-processing - EffectComposer, bloom, DOF, screen effects.", path:"~/.claude/skills/threejs-postprocessing"},
+  {n:"threejs-loaders", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js asset loading - GLTF, textures, images, models, async patterns.", path:"~/.claude/skills/threejs-loaders"},
+  {n:"threejs-interaction", cat:"skill", group:"3D / Three.js", tag:"Three.js", desc:"Three.js interaction - raycasting, controls, mouse/touch input, object selection.", path:"~/.claude/skills/threejs-interaction"},
+  {n:"adobe-batch-edit-photos", cat:"skill", group:"Adobe / AEM", tag:"Adobe CC", desc:"Apply consistent photo adjustments across a set of images so they look like they were edited together.", path:"~/.claude/skills/adobe-batch-edit-photos"},
+  {n:"adobe-create-social-variations", cat:"skill", group:"Adobe / AEM", tag:"Adobe CC", desc:"Resize, crop, or export any image or video into platform-ready social media assets using Adobe Creative Cloud tools.", path:"~/.claude/skills/adobe-create-social-variations"},
+  {n:"adobe-design-from-template", cat:"skill", group:"Adobe / AEM", tag:"Adobe CC", desc:"Create any visual design using Adobe Express templates — including flyers, posters, banners, social media posts…", path:"~/.claude/skills/adobe-design-from-template"},
+  {n:"adobe-edit-quick-cut", cat:"skill", group:"Adobe / AEM", tag:"Adobe CC", desc:"Create a punchy sizzle reel from a video using Adobe Quick Cut.", path:"~/.claude/skills/adobe-edit-quick-cut"},
+  {n:"adobe-resize-photos-and-videos", cat:"skill", group:"Adobe / AEM", tag:"Adobe CC", desc:"Resize photos and videos to exact pixel dimensions or aspect ratios using Adobe tools.", path:"~/.claude/skills/adobe-resize-photos-and-videos"},
+  {n:"adobe-retouch-portraits", cat:"skill", group:"Adobe / AEM", tag:"Adobe CC", desc:"Bulk-retouch a folder of portrait photos using Adobe tools — designed for wedding photographers and event photographers…", path:"~/.claude/skills/adobe-retouch-portraits"},
+  {n:"create-site", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Creates a new AEM Edge Delivery site from scratch — GitHub repo from the boilerplate, aem-code-sync installation, initial DA content…", path:"~/.claude/skills/create-site"},
+  {n:"content-driven-development", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Apply a Content Driven Development process to AEM Edge Delivery Services development. Use for ALL code changes.", path:"~/.claude/skills/content-driven-development"},
+  {n:"building-blocks", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Guide for implementing code changes in AEM Edge Delivery Services. Handles block development, core functionality changes, or both.", path:"~/.claude/skills/building-blocks"},
+  {n:"testing-blocks", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Guide for testing code changes in AEM Edge Delivery projects including blocks, scripts, and styles.", path:"~/.claude/skills/testing-blocks"},
+  {n:"code-review", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Review code for AEM Edge Delivery Services projects. Use at the end of development (before PR) for self-review, or to review PRs.", path:"~/.claude/skills/code-review"},
+  {n:"analyze-and-plan", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Analyzes development requirements and generates structured acceptance criteria for AEM Edge Delivery Services (EDS) tasks.", path:"~/.claude/skills/analyze-and-plan"},
+  {n:"content-modeling", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Create effective content models for your blocks that are easy for authors to work with.", path:"~/.claude/skills/content-modeling"},
+  {n:"block-collection-and-party", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"The Block Collection and Block Party are repositories for existing AEM blocks, build tools, code snippets, integration patterns…", path:"~/.claude/skills/block-collection-and-party"},
+  {n:"block-inventory", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Survey available blocks from local AEM Edge Delivery Services project and Block Collection to understand the block palette…", path:"~/.claude/skills/block-inventory"},
+  {n:"ue-component-model", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Create or edit the Universal Editor component configuration (component-definition, component-models, component-filters JSON)…", path:"~/.claude/skills/ue-component-model"},
+  {n:"find-test-content", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Search for existing content pages containing a specific block in AEM Edge Delivery Services.", path:"~/.claude/skills/find-test-content"},
+  {n:"docs-search", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Searches the aem.live documentation for information on AEM Edge Delivery Services features.", path:"~/.claude/skills/docs-search"},
+  {n:"page-import", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Import a single webpage from any URL to structured HTML content for authoring in AEM Edge Delivery Services.", path:"~/.claude/skills/page-import"},
+  {n:"scrape-webpage", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Scrape webpage content, extract metadata, download images, and prepare for import/migration to AEM Edge Delivery Services.", path:"~/.claude/skills/scrape-webpage"},
+  {n:"identify-page-structure", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Identify section boundaries and content sequences within a scraped webpage for AEM Edge Delivery Services import.", path:"~/.claude/skills/identify-page-structure"},
+  {n:"page-decomposition", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Analyze content sequences within a section and provide neutral descriptions for AEM Edge Delivery Services.", path:"~/.claude/skills/page-decomposition"},
+  {n:"authoring-analysis", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Analyze content sequences and determine authoring approach (default content vs blocks).", path:"~/.claude/skills/authoring-analysis"},
+  {n:"generate-import-html", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Generate structured HTML from authoring analysis for AEM Edge Delivery Services. Creates section structure, applies block tables…", path:"~/.claude/skills/generate-import-html"},
+  {n:"preview-import", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Preview and verify imported content in local AEM Edge Delivery Services dev server. Validates rendering, compares with original page…", path:"~/.claude/skills/preview-import"},
+  {n:"handover", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Generate project handover documentation for AEM Edge Delivery Services projects. Creates comprehensive guides for content authors…", path:"~/.claude/skills/handover"},
+  {n:"authoring", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Generate comprehensive documentation for content authors taking over an AEM Edge Delivery Services project.", path:"~/.claude/skills/authoring"},
+  {n:"development", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Generate comprehensive technical documentation for developers taking over an AEM Edge Delivery Services project.", path:"~/.claude/skills/development"},
+  {n:"admin", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Generate comprehensive admin documentation for AEM Edge Delivery Services project handover.", path:"~/.claude/skills/admin"},
+  {n:"auth", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Authenticate with AEM Edge Delivery Services Config Service API. Opens a browser window for Adobe ID login and captures the auth token…", path:"~/.claude/skills/auth"},
+  {n:"da-auth", cat:"skill", group:"Adobe / AEM", tag:"AEM EDS", desc:"Obtains a valid Adobe IMS access token for the DA (Document Authoring) API.", path:"~/.claude/skills/da-auth"},
+  {n:"best-practices", cat:"skill", group:"Adobe / AEM", tag:"AEM Cloud", desc:"AEM as a Cloud Service Java/OSGi best practices, guardrails, and legacy-to-cloud pattern transformations.", path:"~/.claude/skills/best-practices"},
+  {n:"migration", cat:"skill", group:"Adobe / AEM", tag:"AEM Cloud", desc:"Orchestrates legacy AEM (6.x, AMS, on-prem) to AEM as a Cloud Service migration using BPA CSV or cache, CAM/MCP target discovery…", path:"~/.claude/skills/migration"},
+  {n:"create-component", cat:"skill", group:"Adobe / AEM", tag:"AEM Cloud", desc:"Creates complete AEM components with dialog, HTL template, Sling Model, unit tests, and clientlibs.", path:"~/.claude/skills/create-component"},
+  {n:"aem-workflow", cat:"skill", group:"Adobe / AEM", tag:"AEM Cloud", desc:"Single entry point for all AEM as a Cloud Service Workflow skills. Covers workflow model design, custom process step development…", path:"~/.claude/skills/aem-workflow"},
+  {n:"content-distribution", cat:"skill", group:"Adobe / AEM", tag:"AEM Cloud", desc:"AEM as a Cloud Service content distribution and replication. Covers programmatic publishing using the Replication API…", path:"~/.claude/skills/content-distribution"},
+  {n:"dispatcher", cat:"skill", group:"Adobe / AEM", tag:"AEM Cloud", desc:"Single entry point for all AEM as a Cloud Service Dispatcher skills. Covers config authoring, technical advisory, incident response…", path:"~/.claude/skills/dispatcher"},
+  {n:"ensure-agents-md", cat:"skill", group:"Adobe / AEM", tag:"AEM Cloud", desc:"Run FIRST (before any other skill or task) when workspace root has no AGENTS.md and the repo is an AEM Cloud Service project.", path:"~/.claude/skills/ensure-agents-md"},
+  {n:"aem-replication", cat:"skill", group:"Adobe / AEM", tag:"AEM 6.5", desc:"Single entry point for all AEM 6.5 LTS Replication skills. Covers configuring replication agents, activating/deactivating content…", path:"~/.claude/skills/aem-replication"},
+  {n:"appbuilder-project-init", cat:"skill", group:"App Builder", tag:"App Builder", desc:"Initialize an Adobe App Builder project end-to-end without Developer Console UI clicks.", path:"~/.claude/skills/appbuilder-project-init"},
+  {n:"appbuilder-action-scaffolder", cat:"skill", group:"App Builder", tag:"App Builder", desc:"Create, implement, deploy, and debug Adobe Runtime actions with consistent layout, validation, and error handling.", path:"~/.claude/skills/appbuilder-action-scaffolder"},
+  {n:"appbuilder-ui-scaffolder", cat:"skill", group:"App Builder", tag:"App Builder", desc:"Generate React Spectrum UI components for Adobe Experience Cloud Shell SPAs and AEM UI Extensions.", path:"~/.claude/skills/appbuilder-ui-scaffolder"},
+  {n:"appbuilder-testing", cat:"skill", group:"App Builder", tag:"App Builder", desc:"Generate and run tests for Adobe App Builder actions and UI components. Scaffolds Jest unit tests, integration tests…", path:"~/.claude/skills/appbuilder-testing"},
+  {n:"appbuilder-e2e-testing", cat:"skill", group:"App Builder", tag:"App Builder", desc:"Browser-based end-to-end tests for an Adobe App Builder application. Covers Playwright E2E testing for ExC Shell SPAs…", path:"~/.claude/skills/appbuilder-e2e-testing"},
+  {n:"appbuilder-cicd-pipeline", cat:"skill", group:"App Builder", tag:"App Builder", desc:"Set up CI/CD pipelines for Adobe App Builder projects. Generates GitHub Actions workflows, plus patterns for Azure DevOps and GitLab CI.", path:"~/.claude/skills/appbuilder-cicd-pipeline"},
+  {n:"new-odoo-project", cat:"skill", group:"Odoo / Web", tag:"Odoo", desc:"Scaffold a new Odoo website builder project directory, copy all bundled tools and workflows, create a configured .env template…", path:"~/.claude/skills/new-odoo-project"},
+  {n:"odoo-theme-fix", cat:"skill", group:"Odoo / Web", tag:"Odoo", desc:"Reviews an Odoo page screenshot against the blueprint dark theme, identifies broken elements, writes targeted CSS overrides via RPC…", path:"~/.claude/skills/odoo-theme-fix"},
+  {n:"stop-slop", cat:"skill", group:"Rédaction", tag:"Écriture", desc:"Remove AI writing patterns from prose. Use when drafting, editing, or reviewing text to eliminate predictable AI tells.", path:"~/.claude/skills/stop-slop"},
+  {n:"whitepaper", cat:"skill", group:"Rédaction", tag:"PDF", desc:"Creates professional PDF whitepapers from Markdown files with professional formatting and typography (pandoc + typst).", path:"~/.claude/skills/whitepaper"},
 
-  /* ---- COMMANDES / SKILLS INTÉGRÉS CLAUDE CODE ---- */
+  /* ---- COMMANDES / SKILLS INTÉGRÉS CLAUDE CODE (14) ---- */
   {n:"deep-research", cat:"builtin", group:"Commande intégrée", tag:"Recherche", desc:"Harnais de recherche profonde : fan-out de recherches web, fetch de sources, vérification adversariale et rapport sourcé.", path:"/deep-research"},
   {n:"code-review", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Revue du diff courant : bugs de correction + nettoyages (réutilisation, simplification, efficience) à effort réglable.", path:"/code-review"},
   {n:"security-review", cat:"builtin", group:"Commande intégrée", tag:"Code", desc:"Revue de sécurité complète des changements en attente sur la branche courante.", path:"/security-review"},
@@ -192,7 +221,7 @@ const DATA = [
   {n:"keybindings-help", cat:"builtin", group:"Commande intégrée", tag:"Config", desc:"Personnalise les raccourcis clavier (~/.claude/keybindings.json) : rebind, chords, touche de submit.", path:"/keybindings-help"},
   {n:"fewer-permission-prompts", cat:"builtin", group:"Commande intégrée", tag:"Config", desc:"Analyse les transcripts pour générer une allowlist d'outils et réduire les demandes de permission.", path:"/fewer-permission-prompts"},
 
-  /* ---- SERVEURS MCP CONNECTÉS ---- */
+  /* ---- SERVEURS MCP CONNECTÉS (9) ---- */
   {n:"Figma", cat:"mcp", group:"Serveur MCP", tag:"Design", count:"17 outils", desc:"Pont code ↔ design bidirectionnel : lire un design vers le code, générer dans Figma, Code Connect, FigJam, diagrammes, design systems.", path:"mcp · claude.ai Figma"},
   {n:"Canva", cat:"mcp", group:"Serveur MCP", tag:"Design", count:"34 outils", desc:"Créer/éditer des designs, brand templates, export multi-formats, dossiers, commentaires, upload d'assets.", path:"mcp · claude.ai Canva"},
   {n:"Adobe for creativity", cat:"mcp", group:"Serveur MCP", tag:"Création", count:"63 outils", desc:"Firefly / Photoshop / Lightroom : génération, retouche image (HSL, exposition, courbes), détourage, vectorisation, vidéo, PDF.", path:"mcp · claude.ai Adobe"},
@@ -203,7 +232,7 @@ const DATA = [
   {n:"Google Drive", cat:"mcp", group:"Serveur MCP", tag:"Google", count:"8 outils", desc:"Recherche, lecture et création de fichiers, métadonnées, permissions, fichiers récents.", path:"mcp · claude.ai Drive"},
   {n:"21st.dev (magic)", cat:"mcp", group:"Serveur MCP", tag:"UI", count:"4 outils", desc:"Génération de composants UI (builder, inspiration, refiner) et recherche de logos de marques.", path:"mcp · magic"},
 
-  /* ---- SOUS-AGENTS ---- */
+  /* ---- SOUS-AGENTS (6) ---- */
   {n:"general-purpose", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Agent généraliste : recherche complexe, recherche de code, tâches multi-étapes. Accès à tous les outils.", path:"Agent tool"},
   {n:"Explore", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Agent de recherche en lecture seule : sweeps larges sur de nombreux fichiers/dossiers, renvoie la conclusion.", path:"Agent tool"},
   {n:"Plan", cat:"agent", group:"Sous-agent", tag:"Agent", desc:"Agent architecte : conçoit des plans d'implémentation pas-à-pas, identifie les fichiers critiques et arbitrages.", path:"Agent tool"},
@@ -299,7 +328,7 @@ document.querySelectorAll('a[href="#mcp"],a[href="#agents"]').forEach(a=>{
 });
 
 /* dates */
-const d = new Date(2026,5,3); // 3 juin 2026 (date de génération)
+const d = new Date(2026,5,12); // 12 juin 2026 (date de génération)
 const fmt = d.toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
 document.getElementById("genDate").textContent = fmt;
 document.getElementById("genDate2").textContent = fmt;
