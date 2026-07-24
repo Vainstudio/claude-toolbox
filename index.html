@@ -237,7 +237,17 @@ const DATA = [
   {n:"keybindings-help", cat:"builtin", group:"Commande intégrée", tag:"Config", desc:"Personnalise les raccourcis clavier (~/.claude/keybindings.json) : rebind, chords, touche de submit.", path:"/keybindings-help"},
   {n:"fewer-permission-prompts", cat:"builtin", group:"Commande intégrée", tag:"Config", desc:"Analyse les transcripts pour générer une allowlist d'outils et réduire les demandes de permission.", path:"/fewer-permission-prompts"},
 
-  /* ---- SERVEURS MCP CONNECTÉS (9) ---- */
+  /* ---- IA GÉNÉRATIVE / HIGGSFIELD (7 skills officiels higgsfield-ai/skills, wrappent le CLI higgsfield) ---- */
+  {n:"higgsfield-generate", cat:"skill", group:"IA générative / Higgsfield", tag:"Higgsfield", desc:"Génération image/vidéo/3D/audio sur 30+ modèles (Seedance 2.0, Kling 3.0, Nano Banana 2, GPT Image 2, Soul V2…) + Marketing Studio et Virality Predictor.", path:"~/.claude/skills/higgsfield-generate"},
+  {n:"higgsfield-soul-id", cat:"skill", group:"IA générative / Higgsfield", tag:"Higgsfield", desc:"Entraîner un Soul Character (modèle d'identité visage réutilisable) → reference_id consommable par les modèles Soul-aware.", path:"~/.claude/skills/higgsfield-soul-id"},
+  {n:"higgsfield-product-photoshoot", cat:"skill", group:"IA générative / Higgsfield", tag:"Higgsfield", desc:"Images produit qualité marque : 10 modes (studio, lifestyle, Pinterest, hero banner, ad packs, try-on…) via prompt enhancement backend.", path:"~/.claude/skills/higgsfield-product-photoshoot"},
+  {n:"higgsfield-marketplace-cards", cat:"skill", group:"IA générative / Higgsfield", tag:"Higgsfield", desc:"Cartes produit marketplace : image principale conforme, images secondaires, modules type A+.", path:"~/.claude/skills/higgsfield-marketplace-cards"},
+  {n:"higgsfield-video-explainer", cat:"skill", group:"IA générative / Higgsfield", tag:"Higgsfield", desc:"Vidéos explicatives narrées par blocs de 10 s (Seed Audio + Gemini Omni), assemblage MP4 serveur.", path:"~/.claude/skills/higgsfield-video-explainer"},
+  {n:"higgsfield-websites", cat:"skill", group:"IA générative / Higgsfield", tag:"Higgsfield", desc:"Créer/éditer/déployer des sites full-stack React 19 + TanStack Start sur Cloudflare Workers via higgsfield website.", path:"~/.claude/skills/higgsfield-websites"},
+  {n:"higgsfield-game-generation", cat:"skill", group:"IA générative / Higgsfield", tag:"Higgsfield", desc:"Jeux navigateur jouables + assets de jeu : sprites, textures tileables, 3D riggée, musique, SFX.", path:"~/.claude/skills/higgsfield-game-generation"},
+
+  /* ---- SERVEURS MCP CONNECTÉS (10) ---- */
+  {n:"Higgsfield AE Bridge", cat:"mcp", group:"Serveur MCP", tag:"Motion", count:"HTTP distant", desc:"Bridge officiel Higgsfield ↔ plugin After Effects : Claude construit compos, keyframes, expressions et génère des assets IA directement dans la timeline AE.", path:"mcp · bridge.higgsfield.ai/mcp"},
   {n:"Figma", cat:"mcp", group:"Serveur MCP", tag:"Design", count:"17 outils", desc:"Pont code ↔ design bidirectionnel : lire un design vers le code, générer dans Figma, Code Connect, FigJam, diagrammes, design systems.", path:"mcp · claude.ai Figma"},
   {n:"Canva", cat:"mcp", group:"Serveur MCP", tag:"Design", count:"34 outils", desc:"Créer/éditer des designs, brand templates, export multi-formats, dossiers, commentaires, upload d'assets.", path:"mcp · claude.ai Canva"},
   {n:"Adobe for creativity", cat:"mcp", group:"Serveur MCP", tag:"Création", count:"63 outils", desc:"Firefly / Photoshop / Lightroom : génération, retouche image (HSL, exposition, courbes), détourage, vectorisation, vidéo, PDF.", path:"mcp · claude.ai Adobe"},
