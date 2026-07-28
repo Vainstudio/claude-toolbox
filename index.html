@@ -87,7 +87,7 @@
     <!-- STATS -->
     <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
       <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
-        <div class="font-mono text-3xl font-bold text-run" data-count="68">68</div>
+        <div class="font-mono text-3xl font-bold text-run" data-count="78">78</div>
         <div class="mt-1 text-sm text-muted">Skills actifs</div>
       </div>
       <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
@@ -99,7 +99,7 @@
         <div class="mt-1 text-sm text-muted">Outils MCP</div>
       </div>
       <div class="rounded-2xl border border-white/10 bg-panel/50 p-5">
-        <div class="font-mono text-3xl font-bold text-run">97</div>
+        <div class="font-mono text-3xl font-bold text-run">107</div>
         <div class="mt-1 text-sm text-muted">Capacités totales</div>
       </div>
     </div>
@@ -136,7 +136,7 @@
    DONNÉES — inventaire factuel des capacités de ce poste
    ============================================================ */
 const DATA = [
-  /* ---- SKILLS (67) ---- */
+  /* ---- SKILLS (77) ---- */
   {n:"all-skills", cat:"skill", group:"Méta", tag:"Méta", desc:"Orchestrate every installed skill for a single request. Meta-skill: routes, composes, and synthesizes.", path:"~/.claude/skills/all-skills"},
   {n:"ui-ux-pro-max", cat:"skill", group:"Design / UI", tag:"Design", desc:"UI/UX design intelligence. 67 styles, 96 palettes, 57 font pairings, 25 charts, 13 stacks (React, Next.js, Vue, Svelte, SwiftUI…", path:"~/.claude/skills/ui-ux-pro-max"},
   {n:"stardust", cat:"skill", group:"Design / UI", tag:"Stardust", desc:"Redesign an existing website to make it better. Multi-page, incremental, reasoned in the open. Built on top of impeccable.", path:"~/.claude/skills/stardust"},
@@ -220,6 +220,18 @@ const DATA = [
   {n:"odoo-theme-fix", cat:"skill", group:"Odoo / Web", tag:"Odoo", desc:"Reviews an Odoo page screenshot against the blueprint dark theme, identifies broken elements, writes targeted CSS overrides via RPC…", path:"~/.claude/skills/odoo-theme-fix"},
   {n:"stop-slop", cat:"skill", group:"Rédaction", tag:"Écriture", desc:"Remove AI writing patterns from prose. Use when drafting, editing, or reviewing text to eliminate predictable AI tells.", path:"~/.claude/skills/stop-slop"},
   {n:"whitepaper", cat:"skill", group:"Rédaction", tag:"PDF", desc:"Creates professional PDF whitepapers from Markdown files with professional formatting and typography (pandoc + typst).", path:"~/.claude/skills/whitepaper"},
+
+  /* ---- ADMINISTRATIF / LÉGAL FR (10 — paperasse, ir-france-skill, awesome-legal-skills) ---- */
+  {n:"ir-france", cat:"skill", group:"Administratif / Légal FR", tag:"Impôts", desc:"Guide complet de la déclaration d'impôt sur le revenu (2042 + annexes) : salaires, BNC/BIC, micro-entreprise, foncier, plus-values, crypto, simulateur IR Python.", path:"~/.claude/skills/ir-france"},
+  {n:"fiscaliste", cat:"skill", group:"Administratif / Légal FR", tag:"Impôts", desc:"Fiscalité personnelle des particuliers : IR (barème, quotient, décote, PAS), 2042 et annexes, PFU vs barème, PEA, assurance-vie, LMNP, RSU/BSPCE, crypto (2086), IFI, PER.", path:"~/.claude/skills/fiscaliste"},
+  {n:"comptable", cat:"skill", group:"Administratif / Légal FR", tag:"Compta", desc:"Comptabilité et facturation d'entreprises françaises : écritures PCG, TVA, IS/IR, clôture, liasse 2033/2065, FEC, mentions obligatoires, Factur-X et réforme e-invoicing 2026.", path:"~/.claude/skills/comptable"},
+  {n:"controleur-fiscal", cat:"skill", group:"Administratif / Légal FR", tag:"Compta", desc:"Simule un contrôle fiscal DGFIP complet (SASU, EURL, SAS, SARL) : FEC, liasse, charges déduites, compte courant d'associé, TVA, IS — chefs de redressement chiffrés avec base légale.", path:"~/.claude/skills/controleur-fiscal"},
+  {n:"commissaire-aux-comptes", cat:"skill", group:"Administratif / Légal FR", tag:"Audit", desc:"Audit des comptes annuels selon la démarche NEP en 7 phases : FEC, bilan, compte de résultat, balance, liasse fiscale — opinion motivée avec rapport structuré.", path:"~/.claude/skills/commissaire-aux-comptes"},
+  {n:"notaire", cat:"skill", group:"Administratif / Légal FR", tag:"Juridique", desc:"Droit immobilier, successions, donations, famille et sociétés : frais de notaire, DMTO, plus-value immobilière, démembrement, SCI, projets d'actes (compromis, statuts, testaments).", path:"~/.claude/skills/notaire"},
+  {n:"syndic", cat:"skill", group:"Administratif / Légal FR", tag:"Copropriété", desc:"Gestion de copropriétés : comptabilité décret 2005, AG (convocations, PV, majorités art. 24-26), appels de fonds, fonds de travaux, recouvrement d'impayés, loi 1965/ALUR/ELAN.", path:"~/.claude/skills/syndic"},
+  {n:"assistant-juridique-fr", cat:"skill", group:"Administratif / Légal FR", tag:"Juridique", desc:"Assistant juridique expert en droit français : recherches, consultations, rédaction d'actes, analyses de contrats, veille, vérification de références (Legifrance, jurisprudence).", path:"~/.claude/skills/assistant-juridique-fr"},
+  {n:"notification-licenciement-selim-brihi", cat:"skill", group:"Administratif / Légal FR", tag:"Droit du travail", desc:"Rédaction de notifications de licenciement conformes au droit du travail français (faute grave, faute lourde, motif personnel) avec tous les éléments obligatoires.", path:"~/.claude/skills/notification-licenciement-selim-brihi"},
+  {n:"requete-cph-licenciement-faute-grave-selim-brihi", cat:"skill", group:"Administratif / Légal FR", tag:"Droit du travail", desc:"Rédaction de requêtes devant le Conseil de prud'hommes pour contester un licenciement pour faute grave (saisine CPH).", path:"~/.claude/skills/requete-cph-licenciement-faute-grave-selim-brihi"},
 
   /* ---- COMMANDES / SKILLS INTÉGRÉS CLAUDE CODE (14) ---- */
   {n:"deep-research", cat:"builtin", group:"Commande intégrée", tag:"Recherche", desc:"Harnais de recherche profonde : fan-out de recherches web, fetch de sources, vérification adversariale et rapport sourcé.", path:"/deep-research"},
